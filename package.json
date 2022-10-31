@@ -11,6 +11,9 @@
     "start": "concurrently  \"npm run server\" \"npm run client\"",
     "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix client && npm run build --prefix client"
   },
+  "engines": {
+      "node": "16.14.2"
+  },
   "keywords": [],
   "author": "",
   "license": "ISC",
