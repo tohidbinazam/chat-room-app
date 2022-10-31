@@ -5,6 +5,7 @@ import cors from 'cors'
 import { createServer } from 'http'
 import { Server } from 'socket.io';
 import { readFileSync, writeFileSync } from 'fs';
+import { resolve } from 'path'
 
 dotenv.config()
 const app = express()
@@ -12,7 +13,7 @@ const port = process.env.PORT || 5080
 
 
 app.use(cors())
-app.use(express.static('server/public'))
+// app.use(express.static('server/public'))
 const server = createServer(app)
 
 const io = new Server(server,{
@@ -46,7 +47,12 @@ io.on('connection', (socket) => {
         }
     })
 })
-
+if (process.env.NODE_ENV == 'production') {
+    app.use(express.static('client/build/'))
+    app.get("*", (req, res) => {
+        res.sendFile(resolve(__dirname, 'client', 'build', 'index.html'));
+    })
+}
 
 server.listen(port, () => {
     console.log(`SERVER RUNNING ON PORT ${port}`.bgCyan);
