@@ -13,7 +13,7 @@ const port = process.env.PORT || 5080
 
 
 app.use(cors())
-// app.use(express.static('server/public'))
+app.use(express.static('server/public'))
 const server = createServer(app)
 
 const io = new Server(server,{
@@ -39,11 +39,11 @@ io.on('connection', (socket) => {
         if ( rooms && is_room) {
             data[is_room].push(chat)
             writeFileSync('server/db/chat.json', JSON.stringify(data))
-            io.sockets.to(room).emit('receive_message', data[is_room])
+            io.in(room).emit('receive_message', data[is_room])
         } else {
             const new_chat = {...data, [room]: [chat]}
             writeFileSync('server/db/chat.json', JSON.stringify(new_chat))
-            io.sockets.to(room).emit('receive_message', new_chat[room])
+            io.in(room).emit('receive_message', new_chat[room])
         }
     })
 })
