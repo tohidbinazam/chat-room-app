@@ -12,10 +12,10 @@ const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
     <BrowserRouter>
-    <Provider store = { store }>
-      <ToastContainer theme="dark" />
-      <App />
-    </Provider>
+      <Provider store={store}>
+        <ToastContainer theme='dark' />
+        <App />
+      </Provider>
     </BrowserRouter>
   </React.StrictMode>
 );
