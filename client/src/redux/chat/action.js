@@ -13,7 +13,7 @@ export const joinRoom = (payload) => async (dispatch, getState) => {
     payload,
   });
   dispatch(sendMessage(`Hi, my name is ${payload.user}`));
-  localStorage.setItem('room', payload.room);
+  localStorage.setItem('info', JSON.stringify(payload));
 };
 
 export const sendMessage = (message) => async (dispatch, getState) => {

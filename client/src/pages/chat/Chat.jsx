@@ -49,20 +49,18 @@ const Chat = () => {
                   alt=''
                 />
                 <div variant='success' className='chat-id'>
-                  {' '}
-                  <strong>{`ROOM ID => ${room || 'Not Found'}`}</strong>{' '}
+                  <strong>{`ROOM ID => ${room || 'Not Found'}`}</strong>
                   <Button onClick={handleCopy} size='sm' variant='dark'>
                     <FiCopy />
-                  </Button>{' '}
+                  </Button>
                 </div>
               </Card.Header>
               <Card.Body>
                 <ScrollToBottom className='message-container'>
-                  {chats.map((data) => (
-                    <>
+                  {chats.map((data, index) => (
+                    <div key={index}>
                       {data.user !== user ? (
                         <>
-                          {' '}
                           <h6 className='time'>{data.time}</h6>
                           <div className='message-box'>
                             <img
@@ -76,11 +74,10 @@ const Chat = () => {
                                 send by <strong>{data.user}</strong>
                               </h6>
                             </div>
-                          </div>{' '}
+                          </div>
                         </>
                       ) : (
                         <>
-                          {' '}
                           <h6 className='time'>{data.time}</h6>
                           <div className='message-box right'>
                             <div className='message'>
@@ -97,7 +94,7 @@ const Chat = () => {
                           </div>{' '}
                         </>
                       )}
-                    </>
+                    </div>
                   ))}
                 </ScrollToBottom>
                 <hr />
